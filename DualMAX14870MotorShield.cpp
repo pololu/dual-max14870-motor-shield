@@ -120,3 +120,13 @@ bool DualMAX14870MotorShield::getFault()
 {
   return !digitalRead(_nFAULT);
 }
+
+void DualMAX14870MotorShield::enableDrivers()
+{
+  digitalWrite(_nEN, LOW);
+}
+
+void DualMAX14870MotorShield::disableDrivers()
+{
+  digitalWrite(_nEN, HIGH);
+}

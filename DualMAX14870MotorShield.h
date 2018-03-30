@@ -20,6 +20,8 @@ class DualMAX14870MotorShield
     void flipM1(bool flip);
     void flipM2(bool flip);
     bool getFault();
+    void enableDrivers();
+    void disableDrivers();
 
   private:
     void initPinsAndMaybeTimer();
@@ -34,10 +36,10 @@ class DualMAX14870MotorShield
     bool _flipM1 = false;
     bool _flipM2 = false;
 
+    bool initialized = false;
+
     inline void init()
     {
-      bool initialized = false;
-
       if (!initialized)
       {
         initialized = true;

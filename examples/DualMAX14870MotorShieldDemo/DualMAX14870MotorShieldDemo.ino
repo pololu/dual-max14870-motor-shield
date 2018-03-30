@@ -38,6 +38,8 @@ void setup()
 
 void loop()
 {
+  motors.enableDrivers();
+
   // run M1 motor with positive speed
 
   digitalWrite(LED_PIN, HIGH);
@@ -110,5 +112,6 @@ void loop()
     delay(2);
   }
 
+  motors.disableDrivers();
   delay(500);
 }
