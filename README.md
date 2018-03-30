@@ -8,7 +8,7 @@ Release date: 2018-03-30 <br>
 ## Summary
 
 This is a library for the Arduino IDE that interfaces with the
-[Pololu Dual MAX14870 Motor Driver Shield for Arduino](https://www.pololu.com/catalog/product/3758).
+[Pololu Dual MAX14870 Motor Driver Shield for Arduino](https://www.pololu.com/catalog/product/2519).
 It makes it simple to drive two brushed, DC motors.
 
 ## Supported platforms
@@ -23,7 +23,7 @@ should support any Arduino-compatible board, including the
 ### Hardware
 
 The
-[Pololu Dual MAX14870 Motor Driver Shield for Arduino](https://www.pololu.com/catalog/product/3758)
+[Pololu Dual MAX14870 Motor Driver Shield for Arduino](https://www.pololu.com/catalog/product/2519)
 can be purchased from Pololu's website. Before continuing, careful
 reading of the product page is recommended.
 
