@@ -1,7 +1,7 @@
-#ifndef DualMAX14870MotorShield_h
-#define DualMAX14870MotorShield_h
+#pragma once
 
-#if defined(__AVR_ATmega168__) || defined(__AVR_ATmega328P__) || defined (__AVR_ATmega32U4__)
+#if defined(__AVR_ATmega168__) || defined(__AVR_ATmega328P__) || \
+    defined(__AVR_ATmega328PB__) || defined (__AVR_ATmega32U4__)
   #define DUALMAX14870MOTORSHIELD_USE_20KHZ_PWM
 #endif
 
@@ -47,4 +47,3 @@ class DualMAX14870MotorShield
       }
     }
 };
-#endif

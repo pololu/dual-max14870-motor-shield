@@ -27,9 +27,9 @@ The
 can be purchased from Pololu's website. Before continuing, careful
 reading of the product page is recommended.
 
-This library configures Timer 1 on ATmega168, ATmega328, and ATmega32U4
-microcontrollers to generate a 20 kHz PWM frequency for the motors. The
-library uses `analogWrite()` on any board that does not use one of these
+This library configures Timer 1 on ATmega168, ATmega328P, ATmega328PB, and
+ATmega32U4 microcontrollers to generate a 20 kHz PWM frequency for the motors.
+The library uses `analogWrite()` on any board that does not use one of these
 microcontrollers. On the Arduino Mega 2560 and Arduino Due, `analogWrite()`
 generates 489 Hz and 1 kHz PWM frequencies, respectively, with the
 default timer configuration.
@@ -64,7 +64,7 @@ If this does not work, you can manually install the library:
 An example sketch is available that shows how to use the library.  You
 can access it from the Arduino IDE by opening the "File" menu,
 selecting "Examples", and then selecting "DualMAX14870MotorShield".  If
-you cannot find these examples, the library was probably installed
+you cannot find this example, the library was probably installed
 incorrectly and you should retry the installation instructions above.
 
 ### Demo
