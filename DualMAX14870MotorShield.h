@@ -14,9 +14,9 @@ class DualMAX14870MotorShield
     DualMAX14870MotorShield(uint8_t M1DIR, uint8_t M2DIR, uint8_t nEN,
       uint8_t nFAULT);
 
-    void setM1Speed(int speed);
-    void setM2Speed(int speed);
-    void setSpeeds(int m1Speed, int m2Speed);
+    void setM1Speed(int16_t speed);
+    void setM2Speed(int16_t speed);
+    void setSpeeds(int16_t m1Speed, int16_t m2Speed);
     void flipM1(bool flip);
     void flipM2(bool flip);
     bool getFault();

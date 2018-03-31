@@ -77,17 +77,17 @@ detected, the demo blinks the yellow LED rapidly.
 
 ## Documentation
 
-- `void setM1Speed(int speed)` <br> Set speed and direction for
+- `void setM1Speed(int16_t speed)` <br> Set speed and direction for
   motor 1. Speed should be between -400 and 400. The motors brake at 0
   speed. Positive speeds correspond to motor current flowing from M1A
   to M1B. Negative speeds correspond to motor current flowing from M1B
   to M1A.
-- `void setM2Speed(int speed)` <br> Set speed and direction for
+- `void setM2Speed(int16_t speed)` <br> Set speed and direction for
   motor 2. Speed should be between -400 and 400. The motors brake at 0
   speed. Positive speeds correspond to motor current flowing from M2A
   to M2B. Negative speeds correspond to motor current flowing from M2B
   to M2A.
-- `void setSpeeds(int m1Speed, int m2Speed)` <br> Set speed and
+- `void setSpeeds(int16_t m1Speed, int16_t m2Speed)` <br> Set speed and
   direction for motor 1 and 2.
 - `void flipM1(bool flip)` <br> Flip the direction meaning of the
   speed passed to the setSpeeds function for motor 1.  The default

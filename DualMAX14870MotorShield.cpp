@@ -100,7 +100,7 @@ void DualMAX14870MotorShield::setM2Speed(int16_t speed)
 
 // set speed for both motors
 // speed should be a number between -400 and 400
-void DualMAX14870MotorShield::setSpeeds(int m1Speed, int m2Speed)
+void DualMAX14870MotorShield::setSpeeds(int16_t m1Speed, int16_t m2Speed)
 {
   setM1Speed(m1Speed);
   setM2Speed(m2Speed);
