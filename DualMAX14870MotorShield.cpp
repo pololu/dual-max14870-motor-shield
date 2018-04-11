@@ -3,14 +3,18 @@
 // Constructors ////////////////////////////////////////////////////////////////
 
 DualMAX14870MotorShield::DualMAX14870MotorShield() :
-  _nEN(4), _M1DIR(7), _M2DIR(8), _nFAULT(12)
+  _nEN(4), _M1DIR(7), _M1PWM(9), _M2DIR(8), _M2PWM(10), _nFAULT(12)
 {
 }
 
-// PWM pins cannot be remapped because the library assumes PWM is on Timer1
-DualMAX14870MotorShield::DualMAX14870MotorShield(uint8_t M1DIR, uint8_t M2DIR,
-  uint8_t nEN, uint8_t nFAULT) :
-  _nEN(nEN), _M1DIR(M1DIR), _M2DIR(M2DIR), _nFAULT(nFAULT)
+DualMAX14870MotorShield::DualMAX14870MotorShield(uint8_t M1DIR,
+                                                 uint8_t M1PWM,
+                                                 uint8_t M2DIR,
+                                                 uint8_t M2PWM,
+                                                 uint8_t nEN,
+                                                 uint8_t nFAULT) :
+  _nEN(nEN), _M1DIR(M1DIR), _M1PWM(M1PWM),
+  _M2DIR(M2DIR), _M2PWM(M2PWM), _nFAULT(nFAULT)
 {
 }
 
@@ -29,18 +33,21 @@ void DualMAX14870MotorShield::initPinsAndMaybeTimer()
   digitalWrite(_nEN, LOW); // default to on
   pinMode(_nFAULT, INPUT_PULLUP);
 
-#ifdef DUALMAX14870MOTORSHIELD_USE_20KHZ_PWM
-  // timer 1 configuration
-  // prescaler: clockI/O / 1
-  // outputs enabled
-  // phase-correct PWM
-  // top of 400
-  //
-  // PWM frequency calculation
-  // 16MHz / 1 (prescaler) / 2 (phase-correct) / 400 (top) = 20kHz
-  TCCR1A = 0b10100000;
-  TCCR1B = 0b00010001;
-  ICR1 = 400;
+#ifdef DUALMAX14870MOTORSHIELD_TIMER1_AVAILABLE
+  if (_M1PWM == _M1PWM_TIMER1_PIN && _M2PWM == _M2PWM_TIMER1_PIN)
+  {
+    // timer 1 configuration
+    // prescaler: clockI/O / 1
+    // outputs enabled
+    // phase-correct PWM
+    // top of 400
+    //
+    // PWM frequency calculation
+    // 16MHz / 1 (prescaler) / 2 (phase-correct) / 400 (top) = 20kHz
+    TCCR1A = 0b10100000;
+    TCCR1B = 0b00010001;
+    ICR1 = 400;
+  }
 #endif
 }
 
@@ -59,10 +66,17 @@ void DualMAX14870MotorShield::setM1Speed(int16_t speed)
   if (speed > 400)  // max
     speed = 400;
 
-#ifdef DUALMAX14870MOTORSHIELD_USE_20KHZ_PWM
-  OCR1A = speed;
+#ifdef DUALMAX14870MOTORSHIELD_TIMER1_AVAILABLE
+  if (_M1PWM == _M1PWM_TIMER1_PIN && _M2PWM == _M2PWM_TIMER1_PIN)
+  {
+    OCR1A = speed;
+  }
+  else
+  {
+    analogWrite(_M1PWM, speed * 51 / 80); // map 400 to 255
+  }
 #else
-  analogWrite(_M1PWM, speed * 51 / 80); // default to using analogWrite, mapping 400 to 255
+  analogWrite(_M1PWM, speed * 51 / 80); // map 400 to 255
 #endif
 
   if (reverse ^ _flipM1) // flip if speed was negative or _flipM1 setting is active, but not both
@@ -86,10 +100,17 @@ void DualMAX14870MotorShield::setM2Speed(int16_t speed)
   if (speed > 400)  // max PWM duty cycle
     speed = 400;
 
-#ifdef DUALMAX14870MOTORSHIELD_USE_20KHZ_PWM
-  OCR1B = speed;
+#ifdef DUALMAX14870MOTORSHIELD_TIMER1_AVAILABLE
+  if (_M1PWM == _M1PWM_TIMER1_PIN && _M2PWM == _M2PWM_TIMER1_PIN)
+  {
+    OCR1B = speed;
+  }
+  else
+  {
+    analogWrite(_M2PWM, speed * 51 / 80); // map 400 to 255
+  }
 #else
-  analogWrite(_M2PWM, speed * 51 / 80); // default to using analogWrite, mapping 400 to 255
+  analogWrite(_M2PWM, speed * 51 / 80); // map 400 to 255
 #endif
 
   if (reverse ^ _flipM2) // flip if speed was negative or _flipM2 setting is active, but not both

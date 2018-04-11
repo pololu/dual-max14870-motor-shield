@@ -1,7 +1,7 @@
 # Arduino library for the Pololu Dual MAX14870 Motor Driver Shield
 
-Version: 1.0.0 <br>
-Release date: 2018-03-30 <br>
+Version: 2.0.0 <br>
+Release date: 2018-04-11 <br>
 [![Build Status](https://travis-ci.org/pololu/dual-max14870-motor-shield.svg?branch=master)](https://travis-ci.org/pololu/dual-max14870-motor-shield) <br>
 [www.pololu.com](https://www.pololu.com/)
 
@@ -77,6 +77,13 @@ detected, the demo blinks the yellow LED rapidly.
 
 ## Documentation
 
+- `DualMax14870MotorShield()` <br> Default constructor, selects the
+  default pins as connected by the motor shield.
+- `DualMax14870MotorShield(uint8_t char M1DIR, uint8_t M1PWM, uint8_t
+   M2DIR, uint8_t M2PWM, uint8_t nEN, uint8_t nFAULT)` <br> Alternate
+   constructor for shield connections remapped by user. If M1PWM and
+   M2PWM are remapped, it will try to use analogWrite instead of
+   timer1.
 - `void setM1Speed(int16_t speed)` <br> Set speed and direction for
   motor 1. Speed should be between -400 and 400. The motors brake at 0
   speed. Positive speeds correspond to motor current flowing from M1A
@@ -102,4 +109,6 @@ detected, the demo blinks the yellow LED rapidly.
     
 ## Version history
 
+* 2.0.0 (2018-04-11): Allow PWM remapping (use analogWrite if PWM pins
+  remapped).
 * 1.0.0 (2018-03-30): Original release.
