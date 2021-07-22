@@ -78,7 +78,7 @@ detected, the demo blinks the yellow LED rapidly.
 
 - `DualMax14870MotorShield()` <br> Default constructor, selects the
   default pins as connected by the motor shield.
-- `DualMax14870MotorShield(uint8_t char M1DIR, uint8_t M1PWM, uint8_t
+- `DualMax14870MotorShield(uint8_t M1DIR, uint8_t M1PWM, uint8_t
    M2DIR, uint8_t M2PWM, uint8_t nEN, uint8_t nFAULT)` <br> Alternate
    constructor for shield connections remapped by user. If M1PWM and
    M2PWM are remapped, it will try to use analogWrite instead of
